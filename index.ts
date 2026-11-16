@@ -17,3 +17,6 @@ export {
     type InferenceStreamCallbacks,
 } from "./src/inference-gen/InferenceClient.js";
 export { default } from "./src/inference-gen/InferenceClient.js";
+
+export { DigitalOcean, Sandbox } from "./src/sandbox/index.js";
+export type { CommandResult, SandboxCreateOptions } from "./src/sandbox/index.js";

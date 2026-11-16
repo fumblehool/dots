@@ -87,6 +87,32 @@ Done!
 
 More working examples can be found in `dots/examples`. 
 
+## **Sandboxes**
+
+Create a sandbox and run a command without building a request adapter. The token comes from `DIGITALOCEAN_TOKEN`.
+
+```typescript
+import { Sandbox } from '@digitalocean/dots'
+
+const sandbox = await Sandbox.create()
+const result = await sandbox.commands.run('echo "Hello from DigitalOcean!"')
+console.log(result.stdout)
+await sandbox.kill()
+```
+
+To use more than one token in one process, bind the token to a client. A per-call option overrides the client's option.
+
+```typescript
+import { DigitalOcean } from '@digitalocean/dots'
+
+const client = new DigitalOcean({ token: process.env.DIGITALOCEAN_TOKEN, region: 'nyc3' })
+const sandbox = await client.Sandbox.create({ size: 's-1vcpu-1gb' })
+```
+
+`apiKey` is accepted as an alias of `token`. This calls `/v2/agents/sessions` today. `envs`, `stdin`, and background commands throw, because that API cannot express them.
+
+A local demo that stands in for the API is `node examples/sandbox/run-demo.mjs` (run `npm run build` first).
+
 ## **AI & Inference**
 
 > Added in **v1.11.0**. Talk to DigitalOcean Serverless Inference directly from `DoTs` — streaming chat, image generation, model listing, and more.

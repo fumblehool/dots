@@ -6,6 +6,7 @@
   "main": "index.js",
   "exports": {
     ".": "./index.js",
+    "./sandbox": "./src/sandbox/index.js",
     "./inference": "./src/inference-gen/inference.js",
     "./package.json": "./package.json",
     "./*": "./*"
