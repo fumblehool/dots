@@ -7,3 +7,4 @@ export * from "./src/dots/services/index.js";
 export { createDigitalOceanInferenceClient, DEFAULT_INFERENCE_BASE_URL, INFERENCE_OPENAPI_PATHS, } from "./src/inference-gen/index.js";
 export { InferenceClient, SSEStream, } from "./src/inference-gen/InferenceClient.js";
 export { default } from "./src/inference-gen/InferenceClient.js";
+export { Sandbox } from "./src/sandbox/index.js";
