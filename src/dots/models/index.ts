@@ -983,7 +983,7 @@ export interface Agent_manifest_spec_sandbox extends AdditionalDataHolder, Parsa
      */
     persistentWorkspace?: boolean | null;
     /**
-     * Requested sandbox size (catalog: GET /v2/agents/sessions/sandbox/sizes). Empty means the service default.
+     * Requested sandbox size (catalog: GET /v2/harness-runtime/sessions/sandbox/sizes). Empty means the service default.
      */
     sizeSlug?: string | null;
     /**
@@ -3864,6 +3864,10 @@ export interface ApiEvaluationMetricResult extends AdditionalDataHolder, Parsabl
      * The value of the metric as a number.
      */
     numberValue?: number | null;
+    /**
+     * Whether the score met the metric's success threshold. Set for modelevaluation results only, and only when status is COMPLETED; omittedfor skipped or failed metrics.
+     */
+    passed?: boolean | null;
     /**
      * Reasoning of the metric result.
      */
@@ -12767,7 +12771,7 @@ export interface Checkpoint2 extends AdditionalDataHolder, Parsable {
      */
     diskBytes?: number | null;
     /**
-     * An outbound allow list. A destination that matches any rule is allowed; `default_action` decides every other destination. Only valid with `public` networking, and fixed at create: there is no way to change it later. With a policy set, direct connections out of the MicroVM are dropped; only HTTP and HTTPS through the platform proxy to the allowed destinations works, so clients must honor the injected `HTTP_PROXY` / `HTTPS_PROXY` environment. The registries needed to pull the workload image are allowed automatically. On a MicroVM this is the policy set at create, exactly as supplied. On a checkpoint it is the policy a restored MicroVM inherits; a restore cannot change it. Omitted when egress is unrestricted.
+     * An outbound allow list. A destination that matches any rule is allowed; `default_action` decides every other destination. Only valid with `public` networking, and fixed at create: there is no way to change it later. With a policy set, direct connections out of the MicroVM are dropped; only HTTP and HTTPS through the platform proxy to the allowed destinations works, so clients must honor the injected `HTTP_PROXY` / `HTTPS_PROXY` environment. The registries needed to pull the workload image are allowed automatically. On a MicroVM this is the policy set at create, as supplied, except that credential secrets are never returned. On a checkpoint it is the policy a restored MicroVM inherits; a restore cannot change it. Omitted when egress is unrestricted.
      */
     egressPolicy?: Microvm_egress_policy | null;
     /**
@@ -21984,6 +21988,15 @@ export function createEvents_logsFromDiscriminatorValue(parseNode: ParseNode | u
 /**
  * Creates a new instance of the appropriate class based on discriminator value
  * @param parseNode The parse node to use to read the discriminator value and create the object
+ * @returns {Exec_in_sandbox_request_env}
+ */
+// @ts-ignore
+export function createExec_in_sandbox_request_envFromDiscriminatorValue(parseNode: ParseNode | undefined) : ((instance?: Parsable) => Record<string, (node: ParseNode) => void>) {
+    return deserializeIntoExec_in_sandbox_request_env;
+}
+/**
+ * Creates a new instance of the appropriate class based on discriminator value
+ * @param parseNode The parse node to use to read the discriminator value and create the object
  * @returns {Exec_in_sandbox_request}
  */
 // @ts-ignore
@@ -23194,6 +23207,15 @@ export function createList_tool_health_responseFromDiscriminatorValue(parseNode:
 /**
  * Creates a new instance of the appropriate class based on discriminator value
  * @param parseNode The parse node to use to read the discriminator value and create the object
+ * @returns {List_tool_versions_response}
+ */
+// @ts-ignore
+export function createList_tool_versions_responseFromDiscriminatorValue(parseNode: ParseNode | undefined) : ((instance?: Parsable) => Record<string, (node: ParseNode) => void>) {
+    return deserializeIntoList_tool_versions_response;
+}
+/**
+ * Creates a new instance of the appropriate class based on discriminator value
+ * @param parseNode The parse node to use to read the discriminator value and create the object
  * @returns {List_toolbelt_provider_tools_response}
  */
 // @ts-ignore
@@ -23928,6 +23950,15 @@ export function createMicrovm_create_environmentFromDiscriminatorValue(parseNode
 // @ts-ignore
 export function createMicrovm_createFromDiscriminatorValue(parseNode: ParseNode | undefined) : ((instance?: Parsable) => Record<string, (node: ParseNode) => void>) {
     return deserializeIntoMicrovm_create;
+}
+/**
+ * Creates a new instance of the appropriate class based on discriminator value
+ * @param parseNode The parse node to use to read the discriminator value and create the object
+ * @returns {Microvm_egress_policy_credentials}
+ */
+// @ts-ignore
+export function createMicrovm_egress_policy_credentialsFromDiscriminatorValue(parseNode: ParseNode | undefined) : ((instance?: Parsable) => Record<string, (node: ParseNode) => void>) {
+    return deserializeIntoMicrovm_egress_policy_credentials;
 }
 /**
  * Creates a new instance of the appropriate class based on discriminator value
@@ -25449,6 +25480,15 @@ export function createRegistry_baseFromDiscriminatorValue(parseNode: ParseNode |
 // @ts-ignore
 export function createRegistry_createFromDiscriminatorValue(parseNode: ParseNode | undefined) : ((instance?: Parsable) => Record<string, (node: ParseNode) => void>) {
     return deserializeIntoRegistry_create;
+}
+/**
+ * Creates a new instance of the appropriate class based on discriminator value
+ * @param parseNode The parse node to use to read the discriminator value and create the object
+ * @returns {Registry_insights_opt_in}
+ */
+// @ts-ignore
+export function createRegistry_insights_opt_inFromDiscriminatorValue(parseNode: ParseNode | undefined) : ((instance?: Parsable) => Record<string, (node: ParseNode) => void>) {
+    return deserializeIntoRegistry_insights_opt_in;
 }
 /**
  * Creates a new instance of the appropriate class based on discriminator value
@@ -27036,6 +27076,24 @@ export function createTool_search_resultFromDiscriminatorValue(parseNode: ParseN
 /**
  * Creates a new instance of the appropriate class based on discriminator value
  * @param parseNode The parse node to use to read the discriminator value and create the object
+ * @returns {Tool_version_change}
+ */
+// @ts-ignore
+export function createTool_version_changeFromDiscriminatorValue(parseNode: ParseNode | undefined) : ((instance?: Parsable) => Record<string, (node: ParseNode) => void>) {
+    return deserializeIntoTool_version_change;
+}
+/**
+ * Creates a new instance of the appropriate class based on discriminator value
+ * @param parseNode The parse node to use to read the discriminator value and create the object
+ * @returns {Tool_version_release}
+ */
+// @ts-ignore
+export function createTool_version_releaseFromDiscriminatorValue(parseNode: ParseNode | undefined) : ((instance?: Parsable) => Record<string, (node: ParseNode) => void>) {
+    return deserializeIntoTool_version_release;
+}
+/**
+ * Creates a new instance of the appropriate class based on discriminator value
+ * @param parseNode The parse node to use to read the discriminator value and create the object
  * @returns {Toolbelt_create}
  */
 // @ts-ignore
@@ -28240,6 +28298,24 @@ export function createWorkspaceFromDiscriminatorValue(parseNode: ParseNode | und
     return deserializeIntoWorkspace;
 }
 /**
+ * Creates a new instance of the appropriate class based on discriminator value
+ * @param parseNode The parse node to use to read the discriminator value and create the object
+ * @returns {Write_exec_stdin_request}
+ */
+// @ts-ignore
+export function createWrite_exec_stdin_requestFromDiscriminatorValue(parseNode: ParseNode | undefined) : ((instance?: Parsable) => Record<string, (node: ParseNode) => void>) {
+    return deserializeIntoWrite_exec_stdin_request;
+}
+/**
+ * Creates a new instance of the appropriate class based on discriminator value
+ * @param parseNode The parse node to use to read the discriminator value and create the object
+ * @returns {Write_exec_stdin_response}
+ */
+// @ts-ignore
+export function createWrite_exec_stdin_responseFromDiscriminatorValue(parseNode: ParseNode | undefined) : ((instance?: Parsable) => Record<string, (node: ParseNode) => void>) {
+    return deserializeIntoWrite_exec_stdin_response;
+}
+/**
  * Non-secret configuration for API-key providers that declare credential parameters. Validated against the provider's parameter definitions and used to derive base_url. Rejected for other credential kinds.
  */
 export interface Credential_parameters extends AdditionalDataHolder, Parsable {
@@ -29358,7 +29434,7 @@ export interface Definitions_session extends AdditionalDataHolder, Parsable {
      */
     parentSessionId?: string | null;
     /**
-     * Why this session is paused. Present only when status is SESSION_STATUS_PAUSED; omitted otherwise. Known values: manual (PauseSession RPC), idle (inactivity auto-pause), low_balance (prepay gate). Clients should treat an unrecognized value as an opaque reason string.
+     * Why this session is paused. Present only when status is SESSION_STATUS_PAUSED; omitted otherwise. Known values: manual (the customer paused the session), idle (inactivity auto-pause), zero_balance (prepay gate; stored rows may still say low_balance), trigger (a reuse trigger paused the session after a firing). Clients should treat an unrecognized value as an opaque reason string.
      */
     pauseReason?: string | null;
     /**
@@ -29370,7 +29446,7 @@ export interface Definitions_session extends AdditionalDataHolder, Parsable {
      */
     repoHint?: string | null;
     /**
-     * Session consents to being resumed automatically when the team's prepayment balance is restored after a low-balance pause. Defaults to false at create time; may be toggled later via PATCH /v2/agents/sessions/{session_id} (resume_on_topoff only). Only a session paused with reason low_balance whose latest run did not complete is ever resumed automatically - a session the customer paused themselves, or one that idled out, stays paused regardless. Not an environment-spec field, and forks do not inherit it. Omitted when false.
+     * Session consents to being resumed automatically when the team's prepayment balance is restored after a low-balance pause. Defaults to false at create time; may be toggled later via PATCH /v2/harness-runtime/sessions/{session_id} (resume_on_topoff only). Only a session paused with reason low_balance whose latest run did not complete is ever resumed automatically - a session the customer paused themselves, or one that idled out, stays paused regardless. Not an environment-spec field, and forks do not inherit it. Omitted when false.
      */
     resumeOnTopoff?: boolean | null;
     /**
@@ -32056,6 +32132,7 @@ export function deserializeIntoApiEvaluationMetricResult(apiEvaluationMetricResu
         "metric_uuid": n => { apiEvaluationMetricResult.metricUuid = n.getStringValue(); },
         "metric_value_type": n => { apiEvaluationMetricResult.metricValueType = n.getEnumValue<ApiEvaluationMetricValueType>(ApiEvaluationMetricValueTypeObject) ?? ApiEvaluationMetricValueTypeObject.METRIC_VALUE_TYPE_UNSPECIFIED; },
         "number_value": n => { apiEvaluationMetricResult.numberValue = n.getNumberValue(); },
+        "passed": n => { apiEvaluationMetricResult.passed = n.getBooleanValue(); },
         "reasoning": n => { apiEvaluationMetricResult.reasoning = n.getStringValue(); },
         "status": n => { apiEvaluationMetricResult.status = n.getEnumValue<ApiEvaluationMetricResultStatus>(ApiEvaluationMetricResultStatusObject) ?? ApiEvaluationMetricResultStatusObject.EVALUATION_METRIC_RESULT_STATUS_UNSPECIFIED; },
         "string_value": n => { apiEvaluationMetricResult.stringValue = n.getStringValue(); },
@@ -41222,9 +41299,21 @@ export function deserializeIntoEvents_logs(events_logs: Partial<Events_logs> | u
 export function deserializeIntoExec_in_sandbox_request(exec_in_sandbox_request: Partial<Exec_in_sandbox_request> | undefined = {}) : Record<string, (node: ParseNode) => void> {
     return {
         "argv": n => { exec_in_sandbox_request.argv = n.getCollectionOfPrimitiveValues<string>(); },
+        "env": n => { exec_in_sandbox_request.env = n.getObjectValue<Exec_in_sandbox_request_env>(createExec_in_sandbox_request_envFromDiscriminatorValue); },
+        "keep_stdin_open": n => { exec_in_sandbox_request.keepStdinOpen = n.getBooleanValue(); },
         "stdin": n => { exec_in_sandbox_request.stdin = n.getByteArrayValue(); },
         "timeout_seconds": n => { exec_in_sandbox_request.timeoutSeconds = n.getNumberValue(); },
         "workdir": n => { exec_in_sandbox_request.workdir = n.getStringValue(); },
+    }
+}
+/**
+ * The deserialization information for the current model
+ * @param Exec_in_sandbox_request_env The instance to deserialize into.
+ * @returns {Record<string, (node: ParseNode) => void>}
+ */
+// @ts-ignore
+export function deserializeIntoExec_in_sandbox_request_env(exec_in_sandbox_request_env: Partial<Exec_in_sandbox_request_env> | undefined = {}) : Record<string, (node: ParseNode) => void> {
+    return {
     }
 }
 /**
@@ -43004,6 +43093,18 @@ export function deserializeIntoList_tool_health_response(list_tool_health_respon
 }
 /**
  * The deserialization information for the current model
+ * @param List_tool_versions_response The instance to deserialize into.
+ * @returns {Record<string, (node: ParseNode) => void>}
+ */
+// @ts-ignore
+export function deserializeIntoList_tool_versions_response(list_tool_versions_response: Partial<List_tool_versions_response> | undefined = {}) : Record<string, (node: ParseNode) => void> {
+    return {
+        "next_page_token": n => { list_tool_versions_response.nextPageToken = n.getStringValue(); },
+        "versions": n => { list_tool_versions_response.versions = n.getCollectionOfObjectValues<Tool_version_release>(createTool_version_releaseFromDiscriminatorValue); },
+    }
+}
+/**
+ * The deserialization information for the current model
  * @param List_toolbelt_provider_tools_response The instance to deserialize into.
  * @returns {Record<string, (node: ParseNode) => void>}
  */
@@ -44123,8 +44224,23 @@ export function deserializeIntoMicrovm_create_environment(microvm_create_environ
 // @ts-ignore
 export function deserializeIntoMicrovm_egress_policy(microvm_egress_policy: Partial<Microvm_egress_policy> | undefined = {}) : Record<string, (node: ParseNode) => void> {
     return {
+        "credentials": n => { microvm_egress_policy.credentials = n.getCollectionOfObjectValues<Microvm_egress_policy_credentials>(createMicrovm_egress_policy_credentialsFromDiscriminatorValue); },
         "default_action": n => { microvm_egress_policy.defaultAction = n.getEnumValue<Microvm_egress_policy_default_action>(Microvm_egress_policy_default_actionObject) ?? Microvm_egress_policy_default_actionObject.Deny; },
         "rules": n => { microvm_egress_policy.rules = n.getCollectionOfObjectValues<Microvm_egress_policy_rules>(createMicrovm_egress_policy_rulesFromDiscriminatorValue); },
+    }
+}
+/**
+ * The deserialization information for the current model
+ * @param Microvm_egress_policy_credentials The instance to deserialize into.
+ * @returns {Record<string, (node: ParseNode) => void>}
+ */
+// @ts-ignore
+export function deserializeIntoMicrovm_egress_policy_credentials(microvm_egress_policy_credentials: Partial<Microvm_egress_policy_credentials> | undefined = {}) : Record<string, (node: ParseNode) => void> {
+    return {
+        "host": n => { microvm_egress_policy_credentials.host = n.getStringValue(); },
+        "path_prefix": n => { microvm_egress_policy_credentials.pathPrefix = n.getStringValue(); },
+        "scheme": n => { microvm_egress_policy_credentials.scheme = n.getEnumValue<Microvm_egress_policy_credentials_scheme>(Microvm_egress_policy_credentials_schemeObject) ?? Microvm_egress_policy_credentials_schemeObject.Bearer; },
+        "secret": n => { microvm_egress_policy_credentials.secret = n.getStringValue(); },
     }
 }
 /**
@@ -44370,6 +44486,7 @@ export function deserializeIntoMultiregistry(multiregistry: Partial<Multiregistr
 // @ts-ignore
 export function deserializeIntoMultiregistry_create(multiregistry_create: Partial<Multiregistry_create> | undefined = {}) : Record<string, (node: ParseNode) => void> {
     return {
+        "insights": n => { multiregistry_create.insights = n.getObjectValue<Registry_insights_opt_in>(createRegistry_insights_opt_inFromDiscriminatorValue); },
         "name": n => { multiregistry_create.name = n.getStringValue(); },
         "region": n => { multiregistry_create.region = n.getEnumValue<Multiregistry_create_region>(Multiregistry_create_regionObject); },
         "subscription_tier_slug": n => { multiregistry_create.subscriptionTierSlug = n.getEnumValue<Multiregistry_create_subscription_tier_slug>(Multiregistry_create_subscription_tier_slugObject); },
@@ -46486,9 +46603,21 @@ export function deserializeIntoRegistry_base(registry_base: Partial<Registry_bas
 // @ts-ignore
 export function deserializeIntoRegistry_create(registry_create: Partial<Registry_create> | undefined = {}) : Record<string, (node: ParseNode) => void> {
     return {
+        "insights": n => { registry_create.insights = n.getObjectValue<Registry_insights_opt_in>(createRegistry_insights_opt_inFromDiscriminatorValue); },
         "name": n => { registry_create.name = n.getStringValue(); },
         "region": n => { registry_create.region = n.getEnumValue<Registry_create_region>(Registry_create_regionObject); },
         "subscription_tier_slug": n => { registry_create.subscriptionTierSlug = n.getEnumValue<Registry_create_subscription_tier_slug>(Registry_create_subscription_tier_slugObject); },
+    }
+}
+/**
+ * The deserialization information for the current model
+ * @param Registry_insights_opt_in The instance to deserialize into.
+ * @returns {Record<string, (node: ParseNode) => void>}
+ */
+// @ts-ignore
+export function deserializeIntoRegistry_insights_opt_in(registry_insights_opt_in: Partial<Registry_insights_opt_in> | undefined = {}) : Record<string, (node: ParseNode) => void> {
+    return {
+        "logs": n => { registry_insights_opt_in.logs = n.getBooleanValue(); },
     }
 }
 /**
@@ -48761,6 +48890,37 @@ export function deserializeIntoTool_search_result(tool_search_result: Partial<To
 }
 /**
  * The deserialization information for the current model
+ * @param Tool_version_change The instance to deserialize into.
+ * @returns {Record<string, (node: ParseNode) => void>}
+ */
+// @ts-ignore
+export function deserializeIntoTool_version_change(tool_version_change: Partial<Tool_version_change> | undefined = {}) : Record<string, (node: ParseNode) => void> {
+    return {
+        "breaking": n => { tool_version_change.breaking = n.getBooleanValue(); },
+        "path": n => { tool_version_change.path = n.getStringValue(); },
+        "type": n => { tool_version_change.type = n.getEnumValue<Tool_version_change_type>(Tool_version_change_typeObject); },
+        "values": n => { tool_version_change.values = n.getCollectionOfPrimitiveValues<string>(); },
+    }
+}
+/**
+ * The deserialization information for the current model
+ * @param Tool_version_release The instance to deserialize into.
+ * @returns {Record<string, (node: ParseNode) => void>}
+ */
+// @ts-ignore
+export function deserializeIntoTool_version_release(tool_version_release: Partial<Tool_version_release> | undefined = {}) : Record<string, (node: ParseNode) => void> {
+    return {
+        "breaking": n => { tool_version_release.breaking = n.getBooleanValue(); },
+        "changes": n => { tool_version_release.changes = n.getCollectionOfObjectValues<Tool_version_change>(createTool_version_changeFromDiscriminatorValue); },
+        "latest": n => { tool_version_release.latest = n.getBooleanValue(); },
+        "previous_version": n => { tool_version_release.previousVersion = n.getStringValue(); },
+        "released_at": n => { tool_version_release.releasedAt = n.getDateValue(); },
+        "tool_slug": n => { tool_version_release.toolSlug = n.getStringValue(); },
+        "version": n => { tool_version_release.version = n.getStringValue(); },
+    }
+}
+/**
+ * The deserialization information for the current model
  * @param Toolbelt The instance to deserialize into.
  * @returns {Record<string, (node: ParseNode) => void>}
  */
@@ -49226,6 +49386,8 @@ export function deserializeIntoTrigger_execution(trigger_execution: Partial<Trig
         "run_id": n => { trigger_execution.runId = n.getStringValue(); },
         "session_id": n => { trigger_execution.sessionId = n.getStringValue(); },
         "status": n => { trigger_execution.status = n.getEnumValue<Trigger_execution_status>(Trigger_execution_statusObject); },
+        "status_message": n => { trigger_execution.statusMessage = n.getStringValue(); },
+        "status_reason": n => { trigger_execution.statusReason = n.getStringValue(); },
         "trigger_id": n => { trigger_execution.triggerId = n.getStringValue(); },
         "updated_at": n => { trigger_execution.updatedAt = n.getDateValue(); },
     }
@@ -50564,6 +50726,30 @@ export function deserializeIntoWorkspace_upload_response(workspace_upload_respon
         "path": n => { workspace_upload_response.path = n.getStringValue(); },
     }
 }
+/**
+ * The deserialization information for the current model
+ * @param Write_exec_stdin_request The instance to deserialize into.
+ * @returns {Record<string, (node: ParseNode) => void>}
+ */
+// @ts-ignore
+export function deserializeIntoWrite_exec_stdin_request(write_exec_stdin_request: Partial<Write_exec_stdin_request> | undefined = {}) : Record<string, (node: ParseNode) => void> {
+    return {
+        "data": n => { write_exec_stdin_request.data = n.getByteArrayValue(); },
+        "eof": n => { write_exec_stdin_request.eof = n.getBooleanValue(); },
+        "offset": n => { write_exec_stdin_request.offset = n.getNumberValue(); },
+    }
+}
+/**
+ * The deserialization information for the current model
+ * @param Write_exec_stdin_response The instance to deserialize into.
+ * @returns {Record<string, (node: ParseNode) => void>}
+ */
+// @ts-ignore
+export function deserializeIntoWrite_exec_stdin_response(write_exec_stdin_response: Partial<Write_exec_stdin_response> | undefined = {}) : Record<string, (node: ParseNode) => void> {
+    return {
+        "offset": n => { write_exec_stdin_response.offset = n.getNumberValue(); },
+    }
+}
 export interface Destination extends AdditionalDataHolder, Parsable {
     /**
      * The config property
@@ -51707,7 +51893,15 @@ export interface Exec_in_sandbox_request extends AdditionalDataHolder, Parsable 
      */
     argv?: string[] | null;
     /**
-     * Optional base64 stdin payload, delivered in full and then closed so the process sees EOF. One-shot only — there is no streaming stdin on this endpoint.
+     * Optional environment variables for this command only; nothing is stored on the session and values are not logged, but any process in the sandbox can read them. For credentials the platform holds, use `spec.secrets`. Keys must match `[A-Z][A-Z0-9_]*` and must not be platform-reserved keys (the same rule as `spec.env`). At most 64 entries, keys up to 256 bytes, values up to 64 KiB.
+     */
+    env?: Exec_in_sandbox_request_env | null;
+    /**
+     * Leave the process stdin open. Requires an event-stream response (Accept text/event-stream, or stream=1). The stream starts with event started and an exec_id. A buffered request with this set returns 400.
+     */
+    keepStdinOpen?: boolean | null;
+    /**
+     * Optional base64 stdin payload. Without keep_stdin_open it is delivered in full and then closed so the process sees EOF. With keep_stdin_open it is the optional first chunk. Later bytes use POST /v2/harness-runtime/sessions/{session_id}/sandbox/exec/{exec_id}/stdin.
      */
     stdin?: ArrayBuffer | null;
     /**
@@ -51718,6 +51912,11 @@ export interface Exec_in_sandbox_request extends AdditionalDataHolder, Parsable 
      * Working directory inside the sandbox. Empty uses the sandbox default (/workspace); not restricted to the workspace root.
      */
     workdir?: string | null;
+}
+/**
+ * Optional environment variables for this command only; nothing is stored on the session and values are not logged, but any process in the sandbox can read them. For credentials the platform holds, use `spec.secrets`. Keys must match `[A-Z][A-Z0-9_]*` and must not be platform-reserved keys (the same rule as `spec.env`). At most 64 entries, keys up to 256 bytes, values up to 64 KiB.
+ */
+export interface Exec_in_sandbox_request_env extends AdditionalDataHolder, Parsable {
 }
 export interface Exec_in_sandbox_response extends AdditionalDataHolder, Parsable {
     /**
@@ -53954,6 +54153,19 @@ export interface List_tool_health_response extends AdditionalDataHolder, Parsabl
     tools?: Tool_health[] | null;
 }
 /**
+ * One page of a tool's released versions, newest first.
+ */
+export interface List_tool_versions_response extends AdditionalDataHolder, Parsable {
+    /**
+     * Pass as `page_token` to read older versions. Empty on the last page.
+     */
+    nextPageToken?: string | null;
+    /**
+     * Released versions, newest first.
+     */
+    versions?: Tool_version_release[] | null;
+}
+/**
  * One page of a toolbelt's members from one provider.
  */
 export interface List_toolbelt_provider_tools_response extends AdditionalDataHolder, Parsable {
@@ -55210,7 +55422,7 @@ export interface Microvm_base extends AdditionalDataHolder, Parsable {
      */
     createdAt?: Date | null;
     /**
-     * An outbound allow list. A destination that matches any rule is allowed; `default_action` decides every other destination. Only valid with `public` networking, and fixed at create: there is no way to change it later. With a policy set, direct connections out of the MicroVM are dropped; only HTTP and HTTPS through the platform proxy to the allowed destinations works, so clients must honor the injected `HTTP_PROXY` / `HTTPS_PROXY` environment. The registries needed to pull the workload image are allowed automatically. On a MicroVM this is the policy set at create, exactly as supplied. On a checkpoint it is the policy a restored MicroVM inherits; a restore cannot change it. Omitted when egress is unrestricted.
+     * An outbound allow list. A destination that matches any rule is allowed; `default_action` decides every other destination. Only valid with `public` networking, and fixed at create: there is no way to change it later. With a policy set, direct connections out of the MicroVM are dropped; only HTTP and HTTPS through the platform proxy to the allowed destinations works, so clients must honor the injected `HTTP_PROXY` / `HTTPS_PROXY` environment. The registries needed to pull the workload image are allowed automatically. On a MicroVM this is the policy set at create, as supplied, except that credential secrets are never returned. On a checkpoint it is the policy a restored MicroVM inherits; a restore cannot change it. Omitted when egress is unrestricted.
      */
     egressPolicy?: Microvm_egress_policy | null;
     /**
@@ -55274,7 +55486,7 @@ export interface Microvm_create extends AdditionalDataHolder, Parsable {
      */
     autoResume?: boolean | null;
     /**
-     * An outbound allow list. A destination that matches any rule is allowed; `default_action` decides every other destination. Only valid with `public` networking, and fixed at create: there is no way to change it later. With a policy set, direct connections out of the MicroVM are dropped; only HTTP and HTTPS through the platform proxy to the allowed destinations works, so clients must honor the injected `HTTP_PROXY` / `HTTPS_PROXY` environment. The registries needed to pull the workload image are allowed automatically. On a MicroVM this is the policy set at create, exactly as supplied. On a checkpoint it is the policy a restored MicroVM inherits; a restore cannot change it. Omitted when egress is unrestricted.
+     * An outbound allow list. A destination that matches any rule is allowed; `default_action` decides every other destination. Only valid with `public` networking, and fixed at create: there is no way to change it later. With a policy set, direct connections out of the MicroVM are dropped; only HTTP and HTTPS through the platform proxy to the allowed destinations works, so clients must honor the injected `HTTP_PROXY` / `HTTPS_PROXY` environment. The registries needed to pull the workload image are allowed automatically. On a MicroVM this is the policy set at create, as supplied, except that credential secrets are never returned. On a checkpoint it is the policy a restored MicroVM inherits; a restore cannot change it. Omitted when egress is unrestricted.
      */
     egressPolicy?: Microvm_egress_policy | null;
     /**
@@ -55338,9 +55550,13 @@ export interface Microvm_create_environment extends AdditionalDataHolder, Parsab
 export type Microvm_create_http_protocol = (typeof Microvm_create_http_protocolObject)[keyof typeof Microvm_create_http_protocolObject];
 export type Microvm_create_networking = (typeof Microvm_create_networkingObject)[keyof typeof Microvm_create_networkingObject];
 /**
- * An outbound allow list. A destination that matches any rule is allowed; `default_action` decides every other destination. Only valid with `public` networking, and fixed at create: there is no way to change it later. With a policy set, direct connections out of the MicroVM are dropped; only HTTP and HTTPS through the platform proxy to the allowed destinations works, so clients must honor the injected `HTTP_PROXY` / `HTTPS_PROXY` environment. The registries needed to pull the workload image are allowed automatically. On a MicroVM this is the policy set at create, exactly as supplied. On a checkpoint it is the policy a restored MicroVM inherits; a restore cannot change it. Omitted when egress is unrestricted.
+ * An outbound allow list. A destination that matches any rule is allowed; `default_action` decides every other destination. Only valid with `public` networking, and fixed at create: there is no way to change it later. With a policy set, direct connections out of the MicroVM are dropped; only HTTP and HTTPS through the platform proxy to the allowed destinations works, so clients must honor the injected `HTTP_PROXY` / `HTTPS_PROXY` environment. The registries needed to pull the workload image are allowed automatically. On a MicroVM this is the policy set at create, as supplied, except that credential secrets are never returned. On a checkpoint it is the policy a restored MicroVM inherits; a restore cannot change it. Omitted when egress is unrestricted.
  */
 export interface Microvm_egress_policy extends AdditionalDataHolder, Parsable {
+    /**
+     * Credentials the platform adds to outbound requests, so the workload never holds them. Settable only at create, and only in regions that support credential injection. Each host must be allowed by a rule (or `default_action` must be `allow`). HTTPS requests to these hosts are intercepted so the credential can be attached; clients that pin certificates will fail on them. The credential is sent in the `authorization` header. Credentials cannot be set when restoring a checkpoint: the restored MicroVM inherits the origin's. Responses include `host`, `path_prefix`, and `scheme` for each credential. The `secret` is never returned.
+     */
+    credentials?: Microvm_egress_policy_credentials[] | null;
     /**
      * What to do with a destination no rule matches. `deny` refuses it (an HTTP request gets a 403 and a TLS connection is closed).
      */
@@ -55350,6 +55566,25 @@ export interface Microvm_egress_policy extends AdditionalDataHolder, Parsable {
      */
     rules?: Microvm_egress_policy_rules[] | null;
 }
+export interface Microvm_egress_policy_credentials extends AdditionalDataHolder, Parsable {
+    /**
+     * An exact host. Wildcards and IP addresses are not allowed.
+     */
+    host?: string | null;
+    /**
+     * Only requests whose path starts with this prefix get the credential. Must start with `/`. Defaults to every path.
+     */
+    pathPrefix?: string | null;
+    /**
+     * How the value is sent. `bearer` sends `Bearer <secret>`; `raw` sends the secret as is.
+     */
+    scheme?: Microvm_egress_policy_credentials_scheme | null;
+    /**
+     * The credential value. It is stored in a secrets vault, never returned by the API, and cannot be read back.
+     */
+    secret?: string | null;
+}
+export type Microvm_egress_policy_credentials_scheme = (typeof Microvm_egress_policy_credentials_schemeObject)[keyof typeof Microvm_egress_policy_credentials_schemeObject];
 export type Microvm_egress_policy_default_action = (typeof Microvm_egress_policy_default_actionObject)[keyof typeof Microvm_egress_policy_default_actionObject];
 export interface Microvm_egress_policy_rules extends AdditionalDataHolder, Parsable {
     /**
@@ -55387,7 +55622,7 @@ export interface Microvm_options extends AdditionalDataHolder, Parsable {
      */
     defaultRegion?: string | null;
     /**
-     * Features and whether they are enabled for your team. `exec_pty` gates `exec` and `console`; `file_transfer` gates `files`; `egress_policy` gates `egress_policy` on create.
+     * Features and whether they are enabled for your team. `exec_pty` gates `exec` and `console`; `file_transfer` gates `files`; `egress_policy` gates `egress_policy` on create; `egress_credentials` gates `egress_policy.credentials` (requires `egress_policy`, and only in regions that support credential injection).
      */
     features?: Microvm_options_features[] | null;
     /**
@@ -55647,6 +55882,10 @@ export type Mongo_advanced_config_default_read_concern = (typeof Mongo_advanced_
 export interface Multiregistry extends Parsable, Registry_base {
 }
 export interface Multiregistry_create extends AdditionalDataHolder, Parsable {
+    /**
+     * An object specifying the Insights telemetry that the customer opts in to for the container registry. This is only accepted when creating a registry and is not returned in responses. If the object is omitted, or if `logs` is not set, the registry is created with logs not enabled.
+     */
+    insights?: Registry_insights_opt_in | null;
     /**
      * A globally unique name for the container registry. Must be lowercase and be composed only of numbers, letters and `-`, up to a limit of 63 characters.
      */
@@ -57410,7 +57649,7 @@ export interface Partner_attachment_writable_bgp extends AdditionalDataHolder, P
 export type Partner_attachment_writable_redundancy_zone = (typeof Partner_attachment_writable_redundancy_zoneObject)[keyof typeof Partner_attachment_writable_redundancy_zoneObject];
 export type Partner_attachment_writable_region = (typeof Partner_attachment_writable_regionObject)[keyof typeof Partner_attachment_writable_regionObject];
 /**
- * PATCH body for /v2/agents/sessions/{session_id}. Either toggle the session-scoped `resume_on_topoff` consent, or change the live config with `manifest_yaml`; the two cannot be combined in one request. At least one property must be present; {} is 400. Unknown top-level keys are rejected with 400.
+ * PATCH body for /v2/harness-runtime/sessions/{session_id}. Either toggle the session-scoped `resume_on_topoff` consent, or change the live config with `manifest_yaml`; the two cannot be combined in one request. At least one property must be present; {} is 400. Unknown top-level keys are rejected with 400.
  */
 export interface Patch_session_request extends Parsable {
     /**
@@ -58611,6 +58850,10 @@ export interface Registry_base extends AdditionalDataHolder, Parsable {
 }
 export interface Registry_create extends AdditionalDataHolder, Parsable {
     /**
+     * An object specifying the Insights telemetry that the customer opts in to for the container registry. This is only accepted when creating a registry and is not returned in responses. If the object is omitted, or if `logs` is not set, the registry is created with logs not enabled.
+     */
+    insights?: Registry_insights_opt_in | null;
+    /**
      * A globally unique name for the container registry. Must be lowercase and be composed only of numbers, letters and `-`, up to a limit of 63 characters.
      */
     name?: string | null;
@@ -58625,6 +58868,15 @@ export interface Registry_create extends AdditionalDataHolder, Parsable {
 }
 export type Registry_create_region = (typeof Registry_create_regionObject)[keyof typeof Registry_create_regionObject];
 export type Registry_create_subscription_tier_slug = (typeof Registry_create_subscription_tier_slugObject)[keyof typeof Registry_create_subscription_tier_slugObject];
+/**
+ * An object specifying the Insights telemetry that the customer opts in to for the container registry. This is only accepted when creating a registry and is not returned in responses. If the object is omitted, or if `logs` is not set, the registry is created with logs not enabled.
+ */
+export interface Registry_insights_opt_in extends AdditionalDataHolder, Parsable {
+    /**
+     * A boolean value indicating whether the registry's logs are sent to Insights. Set this to `true` to send the registry's logs to Insights. `false`, and omitting `insights` or `logs`, both create the registry with logs not enabled.
+     */
+    logs?: boolean | null;
+}
 export interface Registry_run_gc extends AdditionalDataHolder, Parsable {
     /**
      * Type of the garbage collection to run against this registry
@@ -62502,6 +62754,7 @@ export function serializeApiEvaluationMetricResult(writer: SerializationWriter, 
     writer.writeStringValue("metric_uuid", apiEvaluationMetricResult.metricUuid);
     writer.writeEnumValue<ApiEvaluationMetricValueType>("metric_value_type", apiEvaluationMetricResult.metricValueType ?? ApiEvaluationMetricValueTypeObject.METRIC_VALUE_TYPE_UNSPECIFIED);
     writer.writeNumberValue("number_value", apiEvaluationMetricResult.numberValue);
+    writer.writeBooleanValue("passed", apiEvaluationMetricResult.passed);
     writer.writeStringValue("reasoning", apiEvaluationMetricResult.reasoning);
     writer.writeEnumValue<ApiEvaluationMetricResultStatus>("status", apiEvaluationMetricResult.status ?? ApiEvaluationMetricResultStatusObject.EVALUATION_METRIC_RESULT_STATUS_UNSPECIFIED);
     writer.writeStringValue("string_value", apiEvaluationMetricResult.stringValue);
@@ -72310,10 +72563,23 @@ export function serializeEvents_logs(writer: SerializationWriter, events_logs: P
 export function serializeExec_in_sandbox_request(writer: SerializationWriter, exec_in_sandbox_request: Partial<Exec_in_sandbox_request> | undefined | null = {}, isSerializingDerivedType: boolean = false) : void {
     if (!exec_in_sandbox_request || isSerializingDerivedType) { return; }
     writer.writeCollectionOfPrimitiveValues<string>("argv", exec_in_sandbox_request.argv);
+    writer.writeObjectValue<Exec_in_sandbox_request_env>("env", exec_in_sandbox_request.env, serializeExec_in_sandbox_request_env);
+    writer.writeBooleanValue("keep_stdin_open", exec_in_sandbox_request.keepStdinOpen);
     writer.writeByteArrayValue("stdin", exec_in_sandbox_request.stdin);
     writer.writeNumberValue("timeout_seconds", exec_in_sandbox_request.timeoutSeconds);
     writer.writeStringValue("workdir", exec_in_sandbox_request.workdir);
     writer.writeAdditionalData(exec_in_sandbox_request.additionalData);
+}
+/**
+ * Serializes information the current object
+ * @param Exec_in_sandbox_request_env The instance to serialize from.
+ * @param isSerializingDerivedType A boolean indicating whether the serialization is for a derived type.
+ * @param writer Serialization writer to use to serialize this model
+ */
+// @ts-ignore
+export function serializeExec_in_sandbox_request_env(writer: SerializationWriter, exec_in_sandbox_request_env: Partial<Exec_in_sandbox_request_env> | undefined | null = {}, isSerializingDerivedType: boolean = false) : void {
+    if (!exec_in_sandbox_request_env || isSerializingDerivedType) { return; }
+    writer.writeAdditionalData(exec_in_sandbox_request_env.additionalData);
 }
 /**
  * Serializes information the current object
@@ -74208,6 +74474,19 @@ export function serializeList_tool_health_response(writer: SerializationWriter, 
 /**
  * Serializes information the current object
  * @param isSerializingDerivedType A boolean indicating whether the serialization is for a derived type.
+ * @param List_tool_versions_response The instance to serialize from.
+ * @param writer Serialization writer to use to serialize this model
+ */
+// @ts-ignore
+export function serializeList_tool_versions_response(writer: SerializationWriter, list_tool_versions_response: Partial<List_tool_versions_response> | undefined | null = {}, isSerializingDerivedType: boolean = false) : void {
+    if (!list_tool_versions_response || isSerializingDerivedType) { return; }
+    writer.writeStringValue("next_page_token", list_tool_versions_response.nextPageToken);
+    writer.writeCollectionOfObjectValues<Tool_version_release>("versions", list_tool_versions_response.versions, serializeTool_version_release);
+    writer.writeAdditionalData(list_tool_versions_response.additionalData);
+}
+/**
+ * Serializes information the current object
+ * @param isSerializingDerivedType A boolean indicating whether the serialization is for a derived type.
  * @param List_toolbelt_provider_tools_response The instance to serialize from.
  * @param writer Serialization writer to use to serialize this model
  */
@@ -75388,9 +75667,25 @@ export function serializeMicrovm_create_environment(writer: SerializationWriter,
 // @ts-ignore
 export function serializeMicrovm_egress_policy(writer: SerializationWriter, microvm_egress_policy: Partial<Microvm_egress_policy> | undefined | null = {}, isSerializingDerivedType: boolean = false) : void {
     if (!microvm_egress_policy || isSerializingDerivedType) { return; }
+    writer.writeCollectionOfObjectValues<Microvm_egress_policy_credentials>("credentials", microvm_egress_policy.credentials, serializeMicrovm_egress_policy_credentials);
     writer.writeEnumValue<Microvm_egress_policy_default_action>("default_action", microvm_egress_policy.defaultAction ?? Microvm_egress_policy_default_actionObject.Deny);
     writer.writeCollectionOfObjectValues<Microvm_egress_policy_rules>("rules", microvm_egress_policy.rules, serializeMicrovm_egress_policy_rules);
     writer.writeAdditionalData(microvm_egress_policy.additionalData);
+}
+/**
+ * Serializes information the current object
+ * @param isSerializingDerivedType A boolean indicating whether the serialization is for a derived type.
+ * @param Microvm_egress_policy_credentials The instance to serialize from.
+ * @param writer Serialization writer to use to serialize this model
+ */
+// @ts-ignore
+export function serializeMicrovm_egress_policy_credentials(writer: SerializationWriter, microvm_egress_policy_credentials: Partial<Microvm_egress_policy_credentials> | undefined | null = {}, isSerializingDerivedType: boolean = false) : void {
+    if (!microvm_egress_policy_credentials || isSerializingDerivedType) { return; }
+    writer.writeStringValue("host", microvm_egress_policy_credentials.host);
+    writer.writeStringValue("path_prefix", microvm_egress_policy_credentials.pathPrefix);
+    writer.writeEnumValue<Microvm_egress_policy_credentials_scheme>("scheme", microvm_egress_policy_credentials.scheme ?? Microvm_egress_policy_credentials_schemeObject.Bearer);
+    writer.writeStringValue("secret", microvm_egress_policy_credentials.secret);
+    writer.writeAdditionalData(microvm_egress_policy_credentials.additionalData);
 }
 /**
  * Serializes information the current object
@@ -75651,6 +75946,7 @@ export function serializeMultiregistry(writer: SerializationWriter, multiregistr
 // @ts-ignore
 export function serializeMultiregistry_create(writer: SerializationWriter, multiregistry_create: Partial<Multiregistry_create> | undefined | null = {}, isSerializingDerivedType: boolean = false) : void {
     if (!multiregistry_create || isSerializingDerivedType) { return; }
+    writer.writeObjectValue<Registry_insights_opt_in>("insights", multiregistry_create.insights, serializeRegistry_insights_opt_in);
     writer.writeStringValue("name", multiregistry_create.name);
     writer.writeEnumValue<Multiregistry_create_region>("region", multiregistry_create.region);
     writer.writeEnumValue<Multiregistry_create_subscription_tier_slug>("subscription_tier_slug", multiregistry_create.subscriptionTierSlug);
@@ -77846,10 +78142,23 @@ export function serializeRegistry_base(writer: SerializationWriter, registry_bas
 // @ts-ignore
 export function serializeRegistry_create(writer: SerializationWriter, registry_create: Partial<Registry_create> | undefined | null = {}, isSerializingDerivedType: boolean = false) : void {
     if (!registry_create || isSerializingDerivedType) { return; }
+    writer.writeObjectValue<Registry_insights_opt_in>("insights", registry_create.insights, serializeRegistry_insights_opt_in);
     writer.writeStringValue("name", registry_create.name);
     writer.writeEnumValue<Registry_create_region>("region", registry_create.region);
     writer.writeEnumValue<Registry_create_subscription_tier_slug>("subscription_tier_slug", registry_create.subscriptionTierSlug);
     writer.writeAdditionalData(registry_create.additionalData);
+}
+/**
+ * Serializes information the current object
+ * @param isSerializingDerivedType A boolean indicating whether the serialization is for a derived type.
+ * @param Registry_insights_opt_in The instance to serialize from.
+ * @param writer Serialization writer to use to serialize this model
+ */
+// @ts-ignore
+export function serializeRegistry_insights_opt_in(writer: SerializationWriter, registry_insights_opt_in: Partial<Registry_insights_opt_in> | undefined | null = {}, isSerializingDerivedType: boolean = false) : void {
+    if (!registry_insights_opt_in || isSerializingDerivedType) { return; }
+    writer.writeBooleanValue("logs", registry_insights_opt_in.logs);
+    writer.writeAdditionalData(registry_insights_opt_in.additionalData);
 }
 /**
  * Serializes information the current object
@@ -80285,6 +80594,39 @@ export function serializeTool_search_result(writer: SerializationWriter, tool_se
 /**
  * Serializes information the current object
  * @param isSerializingDerivedType A boolean indicating whether the serialization is for a derived type.
+ * @param Tool_version_change The instance to serialize from.
+ * @param writer Serialization writer to use to serialize this model
+ */
+// @ts-ignore
+export function serializeTool_version_change(writer: SerializationWriter, tool_version_change: Partial<Tool_version_change> | undefined | null = {}, isSerializingDerivedType: boolean = false) : void {
+    if (!tool_version_change || isSerializingDerivedType) { return; }
+    writer.writeBooleanValue("breaking", tool_version_change.breaking);
+    writer.writeStringValue("path", tool_version_change.path);
+    writer.writeEnumValue<Tool_version_change_type>("type", tool_version_change.type);
+    writer.writeCollectionOfPrimitiveValues<string>("values", tool_version_change.values);
+    writer.writeAdditionalData(tool_version_change.additionalData);
+}
+/**
+ * Serializes information the current object
+ * @param isSerializingDerivedType A boolean indicating whether the serialization is for a derived type.
+ * @param Tool_version_release The instance to serialize from.
+ * @param writer Serialization writer to use to serialize this model
+ */
+// @ts-ignore
+export function serializeTool_version_release(writer: SerializationWriter, tool_version_release: Partial<Tool_version_release> | undefined | null = {}, isSerializingDerivedType: boolean = false) : void {
+    if (!tool_version_release || isSerializingDerivedType) { return; }
+    writer.writeBooleanValue("breaking", tool_version_release.breaking);
+    writer.writeCollectionOfObjectValues<Tool_version_change>("changes", tool_version_release.changes, serializeTool_version_change);
+    writer.writeBooleanValue("latest", tool_version_release.latest);
+    writer.writeStringValue("previous_version", tool_version_release.previousVersion);
+    writer.writeDateValue("released_at", tool_version_release.releasedAt);
+    writer.writeStringValue("tool_slug", tool_version_release.toolSlug);
+    writer.writeStringValue("version", tool_version_release.version);
+    writer.writeAdditionalData(tool_version_release.additionalData);
+}
+/**
+ * Serializes information the current object
+ * @param isSerializingDerivedType A boolean indicating whether the serialization is for a derived type.
  * @param Toolbelt The instance to serialize from.
  * @param writer Serialization writer to use to serialize this model
  */
@@ -80775,6 +81117,8 @@ export function serializeTrigger_execution(writer: SerializationWriter, trigger_
     writer.writeStringValue("run_id", trigger_execution.runId);
     writer.writeStringValue("session_id", trigger_execution.sessionId);
     writer.writeEnumValue<Trigger_execution_status>("status", trigger_execution.status);
+    writer.writeStringValue("status_message", trigger_execution.statusMessage);
+    writer.writeStringValue("status_reason", trigger_execution.statusReason);
     writer.writeStringValue("trigger_id", trigger_execution.triggerId);
     writer.writeDateValue("updated_at", trigger_execution.updatedAt);
     writer.writeAdditionalData(trigger_execution.additionalData);
@@ -82184,6 +82528,32 @@ export function serializeWorkspace_upload_response(writer: SerializationWriter, 
     writer.writeNumberValue("bytes_written", workspace_upload_response.bytesWritten);
     writer.writeStringValue("path", workspace_upload_response.path);
     writer.writeAdditionalData(workspace_upload_response.additionalData);
+}
+/**
+ * Serializes information the current object
+ * @param isSerializingDerivedType A boolean indicating whether the serialization is for a derived type.
+ * @param Write_exec_stdin_request The instance to serialize from.
+ * @param writer Serialization writer to use to serialize this model
+ */
+// @ts-ignore
+export function serializeWrite_exec_stdin_request(writer: SerializationWriter, write_exec_stdin_request: Partial<Write_exec_stdin_request> | undefined | null = {}, isSerializingDerivedType: boolean = false) : void {
+    if (!write_exec_stdin_request || isSerializingDerivedType) { return; }
+    writer.writeByteArrayValue("data", write_exec_stdin_request.data);
+    writer.writeBooleanValue("eof", write_exec_stdin_request.eof);
+    writer.writeNumberValue("offset", write_exec_stdin_request.offset);
+    writer.writeAdditionalData(write_exec_stdin_request.additionalData);
+}
+/**
+ * Serializes information the current object
+ * @param isSerializingDerivedType A boolean indicating whether the serialization is for a derived type.
+ * @param Write_exec_stdin_response The instance to serialize from.
+ * @param writer Serialization writer to use to serialize this model
+ */
+// @ts-ignore
+export function serializeWrite_exec_stdin_response(writer: SerializationWriter, write_exec_stdin_response: Partial<Write_exec_stdin_response> | undefined | null = {}, isSerializingDerivedType: boolean = false) : void {
+    if (!write_exec_stdin_response || isSerializingDerivedType) { return; }
+    writer.writeNumberValue("offset", write_exec_stdin_response.offset);
+    writer.writeAdditionalData(write_exec_stdin_response.additionalData);
 }
 /**
  * A session and the tool-permission policy bound to it.
@@ -83882,6 +84252,61 @@ export interface Tool_search_result extends AdditionalDataHolder, Parsable {
     version?: number | null;
 }
 /**
+ * One difference from the previous released version.
+ */
+export interface Tool_version_change extends AdditionalDataHolder, Parsable {
+    /**
+     * True when a call that worked against the previous version can fail against this one.
+     */
+    breaking?: boolean | null;
+    /**
+     * Dotted path of the schema property that changed, for example `page.cursor`. `items[]` names an array's elements. Empty for the schema root and for scope changes.
+     */
+    path?: string | null;
+    /**
+     * What changed. `inputPropertyAdded` is breaking when the property is required. `inputTypeChanged` and `outputTypeChanged` list the new types in `values`, and are breaking when a previously accepted input type is no longer accepted or an output can hold a new type. `requiredScopesAdded` is breaking because a connection authorized before the version may lack the scopes and must be reconnected. `inputSchemaChanged` and `outputSchemaChanged` cover other schema changes and are reported as breaking, except when an output schema is declared for the first time.
+     */
+    type?: Tool_version_change_type | null;
+    /**
+     * The values the change concerns, sorted: enum values added or removed, the property's new types, or the scopes added or removed. Empty otherwise.
+     */
+    values?: string[] | null;
+}
+export type Tool_version_change_type = (typeof Tool_version_change_typeObject)[keyof typeof Tool_version_change_typeObject];
+/**
+ * One released version of a catalog tool.
+ */
+export interface Tool_version_release extends AdditionalDataHolder, Parsable {
+    /**
+     * True when any change is breaking.
+     */
+    breaking?: boolean | null;
+    /**
+     * Changes from `previous_version`, input changes first, then output, then scopes. Descriptions, titles, and examples are not compared.
+     */
+    changes?: Tool_version_change[] | null;
+    /**
+     * True for the version calls without a pinned version currently use. At most one version is latest; none is while a tool is withdrawn from the catalog.
+     */
+    latest?: boolean | null;
+    /**
+     * The released version this one is compared with. Empty for the oldest version listed, which has no changes.
+     */
+    previousVersion?: string | null;
+    /**
+     * When this version was first released.
+     */
+    releasedAt?: Date | null;
+    /**
+     * Catalog tool slug.
+     */
+    toolSlug?: string | null;
+    /**
+     * Version, for example `v3`. Pin it as `<tool_slug>@v3`.
+     */
+    version?: string | null;
+}
+/**
  * One version of a toolbelt.
  */
 export interface Toolbelt extends AdditionalDataHolder, Parsable {
@@ -84548,6 +84973,14 @@ export interface Trigger_execution extends AdditionalDataHolder, Parsable {
      */
     status?: Trigger_execution_status | null;
     /**
+     * Human-readable detail for status_reason. Omitted when status_reason is omitted.
+     */
+    statusMessage?: string | null;
+    /**
+     * Why a running execution has not started its turn. Omitted when there is nothing to report. Known value: waiting_for_bound_session (a reuse firing is waiting for its bound session to pause; status stays running). Clients should treat an unrecognized value as an opaque string.
+     */
+    statusReason?: string | null;
+    /**
      * The trigger_id property
      */
     triggerId?: string | null;
@@ -84944,7 +85377,7 @@ export interface Validate_registry extends AdditionalDataHolder, Parsable {
     name?: string | null;
 }
 /**
- * Response of POST /v2/agents/sessions/policy/validate: per-rule verdicts for the (agent, version). The same shape is persisted per session in session_policies.verdicts.
+ * Response of POST /v2/harness-runtime/sessions/policy/validate: per-rule verdicts for the (agent, version). The same shape is persisted per session in session_policies.verdicts.
  */
 export interface Validation_result extends AdditionalDataHolder, Parsable {
     /**
@@ -85945,7 +86378,7 @@ export interface Webhook_config extends AdditionalDataHolder, Parsable {
      */
     provider?: Webhook_provider_key | null;
     /**
-     * The Payload URL to configure in the external system.
+     * The Payload URL to configure in the external system. The service returns the `/v2/agents` spelling. Paste that value unchanged.
      */
     webhookUrl?: string | null;
 }
@@ -86245,6 +86678,26 @@ export interface Workspace_upload_response extends AdditionalDataHolder, Parsabl
      * Absolute guest path the payload was written to.
      */
     path?: string | null;
+}
+export interface Write_exec_stdin_request extends AdditionalDataHolder, Parsable {
+    /**
+     * Base64 stdin bytes to append. Omit on an eof-only write.
+     */
+    data?: ArrayBuffer | null;
+    /**
+     * Close stdin after this write. A later write, or a second eof, returns 409.
+     */
+    eof?: boolean | null;
+    /**
+     * Required. Count of stdin bytes already accepted. An equal offset appends. A lower offset retries and trims the overlap. A higher offset returns 409.
+     */
+    offset?: number | null;
+}
+export interface Write_exec_stdin_response extends AdditionalDataHolder, Parsable {
+    /**
+     * Count of stdin bytes accepted after this write.
+     */
+    offset?: number | null;
 }
 /**
  * Current state of the Accelerator.
@@ -88747,6 +89200,13 @@ export const Microvm_create_networkingObject = {
     Vpc: "vpc",
 } as const;
 /**
+ * How the value is sent. `bearer` sends `Bearer <secret>`; `raw` sends the secret as is.
+ */
+export const Microvm_egress_policy_credentials_schemeObject = {
+    Bearer: "bearer",
+    Raw: "raw",
+} as const;
+/**
  * What to do with a destination no rule matches. `deny` refuses it (an HTTP request gets a 403 and a TLS connection is closed).
  */
 export const Microvm_egress_policy_default_actionObject = {
@@ -89519,6 +89979,27 @@ export const Tool_result_error_statusObject = {
 export const Tool_result_statusObject = {
     Succeeded: "succeeded",
     Failed: "failed",
+} as const;
+/**
+ * What changed. `inputPropertyAdded` is breaking when the property is required. `inputTypeChanged` and `outputTypeChanged` list the new types in `values`, and are breaking when a previously accepted input type is no longer accepted or an output can hold a new type. `requiredScopesAdded` is breaking because a connection authorized before the version may lack the scopes and must be reconnected. `inputSchemaChanged` and `outputSchemaChanged` cover other schema changes and are reported as breaking, except when an output schema is declared for the first time.
+ */
+export const Tool_version_change_typeObject = {
+    InputPropertyAdded: "inputPropertyAdded",
+    InputPropertyRemoved: "inputPropertyRemoved",
+    InputPropertyRequired: "inputPropertyRequired",
+    InputPropertyOptional: "inputPropertyOptional",
+    InputTypeChanged: "inputTypeChanged",
+    InputEnumValuesAdded: "inputEnumValuesAdded",
+    InputEnumValuesRemoved: "inputEnumValuesRemoved",
+    InputSchemaChanged: "inputSchemaChanged",
+    OutputPropertyAdded: "outputPropertyAdded",
+    OutputPropertyRemoved: "outputPropertyRemoved",
+    OutputPropertyOptional: "outputPropertyOptional",
+    OutputTypeChanged: "outputTypeChanged",
+    OutputEnumValuesAdded: "outputEnumValuesAdded",
+    OutputSchemaChanged: "outputSchemaChanged",
+    RequiredScopesAdded: "requiredScopesAdded",
+    RequiredScopesRemoved: "requiredScopesRemoved",
 } as const;
 /**
  * active, or deprecated once the toolbelt is deleted.

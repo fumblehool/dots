@@ -1,6 +1,6 @@
 {
-  "descriptionHash": "EBF3F7AD276261CB448E840F5440641818BA74B00EAA67EED07B5113ADF81009919C596854EFF8695E51188F7326D9EF1B9FA003B935EAAD7C1FC13F51591C67",
-  "descriptionLocation": "../../DigitalOcean-public.v2.yaml",
+  "descriptionHash": "1D027936557DA1A6FBA119EB42C0E89EA064BA8F0AE96F9B2F9F03A4850B32B2E1CC30E4068D14246976F17307684100778DEEB5138FDED6163C0229C2971390",
+  "descriptionLocation": "../../../sandbox-api/openapi/tests/DigitalOcean-public.v2.yaml",
   "lockFileVersion": "1.0.0",
   "kiotaVersion": "1.31.1",
   "clientClassName": "DigitalOceanClient",

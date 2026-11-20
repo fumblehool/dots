@@ -23,7 +23,7 @@
     "example:inference-v1": "npm run build && node examples/inference-v1-github-style.mjs",
     "example:inference-chat": "npm run build && node examples/inference-chat-like-openai.mjs",
     "example:openai-compat": "npm run build && node examples/openai-compat-test.mjs",
-    "postgen": "node scripts/postgen-inference.mjs"
+    "postgen": "node scripts/postgen.mjs"
   },
   "author": "DigitalOcean",
   "license": "Apache-2.0",

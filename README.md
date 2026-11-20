@@ -94,9 +94,9 @@ Create a sandbox and run a command without building a request adapter. The token
 ```typescript
 import { Sandbox } from '@digitalocean/dots'
 
-const sandbox = await Sandbox.create()
-const result = await sandbox.commands.run('echo "Hello from DigitalOcean!"')
-console.log(result.stdout)
+const sandbox = await Sandbox.create({ template: 'coding-base', size: 'mars-2vcpu-4gb' })
+await sandbox.pause()
+await sandbox.resume()
 await sandbox.kill()
 ```
 
@@ -106,10 +106,11 @@ To use more than one token in one process, bind the token to a client. A per-cal
 import { DigitalOcean } from '@digitalocean/dots'
 
 const client = new DigitalOcean({ token: process.env.DIGITALOCEAN_TOKEN, region: 'nyc3' })
-const sandbox = await client.Sandbox.create({ size: 's-1vcpu-1gb' })
+const sandbox = await client.Sandbox.create({ template: 'coding-base', size: 'mars-2vcpu-4gb' })
+const { sandboxes } = await client.Sandbox.list()
 ```
 
-`apiKey` is accepted as an alias of `token`. This calls `/v2/agents/sessions` today. `envs`, `stdin`, and background commands throw, because that API cannot express them.
+`apiKey` is accepted as an alias of `token`. SandboxPublic surface: create, list, get, delete, pause, resume. `commands.run` throws (no REST exec). Local sandbox-api (`https://127.0.0.1:46080`) needs `DIGITALOCEAN_TLS_INSECURE=1` or `tlsInsecure: true` (dev CA), same idea as `curl -k`.
 
 A local demo that stands in for the API is `node examples/sandbox/run-demo.mjs` (run `npm run build` first).
 

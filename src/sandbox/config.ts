@@ -10,11 +10,26 @@ export interface ClientOptions {
     region?: string;
     /** Full API origin. Overrides `region`. */
     apiUrl?: string;
+    /**
+     * Skip TLS certificate verification (like `curl -k`).
+     * For local sandbox-api with a self-signed cert only — never use in production.
+     * Also set via `DIGITALOCEAN_TLS_INSECURE=1`.
+     */
+    tlsInsecure?: boolean;
 }
 
 export interface Connection {
     token: string;
     apiUrl: string;
+    tlsInsecure: boolean;
+}
+
+function envFlagTrue(value: string | undefined): boolean {
+    if (!value) {
+        return false;
+    }
+    const v = value.trim().toLowerCase();
+    return v === "1" || v === "true" || v === "yes";
 }
 
 export function resolveConnection(opts: ClientOptions = {}, env: NodeJS.ProcessEnv = process.env): Connection {
@@ -27,5 +42,6 @@ export function resolveConnection(opts: ClientOptions = {}, env: NodeJS.ProcessE
     const region = opts.region ?? env.DIGITALOCEAN_REGION;
     const apiUrl = (opts.apiUrl ?? env.DIGITALOCEAN_API_URL ?? (region ? `https://api-${region}.digitalocean.com` : DEFAULT_API_URL))
         .replace(/\/+$/, "");
-    return { token, apiUrl };
+    const tlsInsecure = opts.tlsInsecure ?? envFlagTrue(env.DIGITALOCEAN_TLS_INSECURE);
+    return { token, apiUrl, tlsInsecure };
 }

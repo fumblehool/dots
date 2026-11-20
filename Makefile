@@ -69,9 +69,9 @@ generate: download-spec ## Generates the typescript client using the latest publ
 endif
 generate: dev-dependencies
 	@printf "=== Generating client with spec: $(SPEC_FILE)\n"; \
-	printf "=== Kiota: ./src/dots. Post-gen inference: ./src/inference-gen (from bundled spec).\n\n"; \
+	printf "=== Kiota: ./src/dots. Post-gen: inference-gen + root sandbox exports.\n\n"; \
 	kiota generate -l typescript -d $(SPEC_FILE) -c DigitalOceanClient -o ./src/dots && \
-	node scripts/postgen-inference.mjs "$(SPEC_FILE)"
+	node scripts/postgen.mjs "$(SPEC_FILE)"
 
 .PHONY: tag
 tag: ## Tags a GA release (vX.Y.Z from package.json)

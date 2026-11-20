@@ -3,7 +3,7 @@
  *
  * This file is HAND-WRITTEN and intentionally kept thin. It re-exports the
  * auto-generated `InferenceClient` (regenerated from the OpenAPI spec by
- * `scripts/postgen-inference.mjs`) under cleaner namespace-local names so
+ * `scripts/postgen.mjs`) under cleaner namespace-local names so
  * consumers can write:
  *
  *   import { Client } from "@digitalocean/dots/inference";
@@ -26,7 +26,7 @@
  *
  * Auto-inclusion: because this barrel re-exports `*` from the regenerated
  * `InferenceClient`, any new endpoint added to the OpenAPI spec (and picked
- * up by `postgen-inference.mjs` on the next `make generate`) is automatically
+ * up by `postgen.mjs` on the next `make generate`) is automatically
  * reachable as `inference.Client.<group>.<method>(...)` with no edits here.
  */
 

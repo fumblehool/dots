@@ -10,7 +10,13 @@ export interface RequestOptions {
 }
 
 export class SandboxHttp {
-    constructor(private readonly connection: Connection) {}
+    constructor(private readonly connection: Connection) {
+        if (connection.tlsInsecure && process.env.NODE_TLS_REJECT_UNAUTHORIZED !== "0") {
+            // Same effect as curl -k for local sandbox-api (DO Developer Root CA).
+            // Process-wide: only for local/dev. Prefer NODE_EXTRA_CA_CERTS=devca.crt when possible.
+            process.env.NODE_TLS_REJECT_UNAUTHORIZED = "0";
+        }
+    }
 
     async request(method: string, path: string, opts: RequestOptions = {}): Promise<any> {
         const headers: Record<string, string> = {
@@ -36,7 +42,7 @@ export class SandboxHttp {
         });
         const text = await response.text();
         if (!response.ok) {
-            const message = text || response.statusText;
+            const message = formatErrorBody(text) || response.statusText;
             if (response.status === 401 || response.status === 403) {
                 throw new AuthenticationError(`authentication failed (${response.status}): ${message}`);
             }
@@ -54,4 +60,22 @@ export class SandboxHttp {
             return text;
         }
     }
+}
+
+/** Prefer `{id, message, request_id}` from SandboxPublic error bodies. */
+function formatErrorBody(text: string): string {
+    if (!text) {
+        return "";
+    }
+    try {
+        const body = JSON.parse(text);
+        if (body && typeof body === "object" && (body.message || body.id)) {
+            const parts = [body.id, body.message, body.request_id ? `request_id=${body.request_id}` : ""]
+                .filter(Boolean);
+            return parts.join(": ");
+        }
+    } catch {
+        /* not JSON */
+    }
+    return text;
 }

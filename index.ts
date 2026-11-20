@@ -4,7 +4,7 @@ export * from "./src/dots/models/index.js";
 export * from "./src/dots/streaming/index.js";
 export * from "./src/dots/services/index.js";
 
-/* postgen-inference exports */
+/* postgen exports */
 export {
     createDigitalOceanInferenceClient,
     DEFAULT_INFERENCE_BASE_URL,
@@ -19,4 +19,12 @@ export {
 export { default } from "./src/inference-gen/InferenceClient.js";
 
 export { DigitalOcean, Sandbox } from "./src/sandbox/index.js";
-export type { CommandResult, SandboxCreateOptions } from "./src/sandbox/index.js";
+export type {
+    CommandResult,
+    SandboxCreateOptions,
+    SandboxGetOptions,
+    SandboxInfo,
+    SandboxListOptions,
+    SandboxListResult,
+    SandboxState,
+} from "./src/sandbox/index.js";
